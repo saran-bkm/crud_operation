@@ -27,7 +27,6 @@
 
         <p style="margin-top: 30px; color: #888; font-size: 14px; text-align: center;">
             Warm regards,<br>
-            <strong>Your Company Team</strong>
         </p>
     </div>
 </body>
