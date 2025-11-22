@@ -50,7 +50,11 @@
                             <a href="{{ url('items/edit/'.$i->id) }}">
                                 <i class="fa fa-edit me-2"></i>
                             </a>   
-                        </td>                           
+                            <a href="javascript:void(0);" class="delete-item" data-id="{{ $i->id }}">
+                                <i class="fa fa-trash me-2 text-danger"></i>
+                            </a>
+                        </td> 
+                                                  
                     </tr>
                     @endforeach
                 </tbody>
@@ -106,6 +110,48 @@
                         }
                 });
             });
+
+            $('.delete-item').click(function(e) {
+        e.preventDefault();
+
+        let itemId = $(this).data('id');
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '/items/' + itemId,
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        _method: 'DELETE'
+                    },
+                    success: function(res){
+                        toastr.success(res.message);
+                            window.location.href = '/items';
+                    },
+
+                    error: function (xhr) {
+                            if (xhr.status === 422) {
+                                let errors = xhr.responseJSON.errors;
+                                $.each(errors, function(key, value) {
+                                    toastr.error(value[0]);
+                                });
+                            } else {
+                                        toastr.error("Something went wrong!");
+                            }
+                        }
+                });
+            }
+        })
+    });
 
         </script> 
 

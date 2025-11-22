@@ -20,6 +20,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/items/add', [ItemController::class, 'add']);
     Route::post('/items/store', [ItemController::class, 'store']);
     Route::get('/items/edit/{id}', [ItemController::class, 'edit']);
+    Route::delete('/items/{id}', [ItemController::class, 'destroy'])->name('items.destroy');
     Route::post('/items/update', [ItemController::class, 'update']);
     Route::post('/items/bulk-upload', [ItemController::class, 'bulkUpload'])->name('items.bulk-upload');
 

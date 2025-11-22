@@ -33,6 +33,23 @@ class ItemController extends Controller
         return view('items.edit', compact('items'));
     }
 
+    public function destroy($id)
+    {
+        $item = Item::find($id);
+
+        
+        if (!$item) {
+            return redirect()->route('items')
+                ->with('error', 'Item not found!');
+        }
+
+        $item->delete();
+
+        return redirect()->route('items')
+            ->with('success', 'Item deleted successfully!');
+    }
+
+
 
     public function store(Request $request)
     {
