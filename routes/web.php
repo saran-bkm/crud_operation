@@ -24,4 +24,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/items/update', [ItemController::class, 'update']);
     Route::post('/items/bulk-upload', [ItemController::class, 'bulkUpload'])->name('items.bulk-upload');
 
+    Route::get('/download-excel', function () {
+        $filePath = public_path('assets/items/items_demo.xlsx');
+        return response()->download($filePath);
+    });
+
+
 });

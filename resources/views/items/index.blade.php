@@ -6,7 +6,10 @@
    
 <div class="row mb-3">
             <div class="col-12 d-flex flex-column flex-md-row justify-content-end align-items-stretch gap-2 gap-md-3">
-
+            <a href="{{ url('download-excel') }}" 
+            class="btn btn-success flex-shrink-0">
+                Demo Excel
+            </a>
             <form id="bulkUploadForm" class="d-flex flex-column flex-md-row align-items-stretch gap-2" enctype="multipart/form-data">
                     <input type="file" name="file" class="form-control flex-grow-1" accept=".csv,.xlsx" required>
 
